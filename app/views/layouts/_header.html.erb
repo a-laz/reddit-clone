@@ -1,15 +1,25 @@
 <div class="container">
     <div class="row">
-        <div class="col-12 pt-3 pb-4 mb-4 border-bottom">
+        <div class="col-12 pt-3 pb-4">
             <div class="float-end">
                 <% if account_signed_in? %>
-                    <%= link_to "Sign Out", destroy_account_session_path, data: { "turbo-method": :delete }, class: "btn btn-primary" %>
+                <div class="dropdown">
+                    <a class="btn btn-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <%= current_account.full_name %>
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <%= link_to "Profile", profile_path(current_account.username), method: :get, class: "dropdown-item" %>
+                        <%= link_to "Settings", edit_account_registration_path, method: :get, class: "dropdown-item" %>
+                        <%= button_to "Sign Out", destroy_account_session_path, method: :delete, class: "dropdown-item" %>
+                    </ul>
+                </div>
                 <% else %>
                     <%= link_to "Log In", new_account_session_path, class: "btn btn-outline-primary" %>
                     <%= link_to "Sign Up", new_account_registration_path, class: "btn btn-primary" %>
                 <% end %>
             </div>
-            <p class="h3">Reddit Clone</p>
+            <p class="h3"><%= link_to "Reddit Clone", root_path %></p>
         </div>
      </div>
 </div>

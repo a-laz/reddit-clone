@@ -1,49 +1,46 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <p class="h4">Trending</p>
-        </div>
+
+<% unless account_signed_in? %>
+<div class="row">
+    <div class="col">
+        <p class="h4">Trending Today</p>
     </div>
+</div>
 
-    <div class="row">
-        <div class="col-sm-3">
-            Trending 1
-        </div>
-        <div class="col-sm-3">
-            Trending 2
-        </div>
-        <div class="col-sm-3">
-            Trending 3
-        </div>
-        <div class="col-sm-3">
-            Trending 4
-        </div>
-
+<div class="row">
+    <div class="col-sm-3">
+        Trending 1
     </div>
-
-    <div class="row mt-4">
-        <div class="col">
-            <p class="h5">Popular Posts</p>
-        </div>
+    <div class="col-sm-3">
+        Trending 2
     </div>
+    <div class="col-sm-3">
+        Trending 3
+    </div>
+    <div class="col-sm-3">
+        Trending 4
+    </div>
+</div>
+<% end %>
+<div class="row">
+    <div class="col">
+        <p class="h5">Popular Posts</p>
+    </div>
+</div>
 
-    <div class="row">
-        <div class="col-8">
-            left col (wide)
+<div class="row">
+    <div class="col-8">
+        <%= render partial: "posts/list", locals: { posts: @posts } %>
+    </div>
+    <div class="col-4">
+        <p class="h5 mb-4">Up and coming Communities</p>
+        <div class="card">
+            <ul class="list-group list-group-flush">
+                <% @communities.each do |community| %>
+                    <li class="list-group-item"><%= link_to community.name, community_path(community) %></li>
+                <% end %>
+            </ul>
         </div>
-        <div class="col-4">
-            <p class="h5 mb-4">Up and coming Communities</p>
-            <div class="card">
-                <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-            </div>
 
-            <%= link_to "View all", "", class: "btn btn-primary mt-4" %>
-        </div>
+        <%= link_to "View all", communities_path, class: "btn btn-primary mt-4" %>
     </div>
 </div>
